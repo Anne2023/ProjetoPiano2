@@ -86,7 +86,7 @@ header.column span{
     border-radius: 0 0 5px 5px;
     background: linear-gradient(#333 96%, #000);
     }
-    .piano-keys .black:active{
+    .piano-keys .black.active{
         box-shadow: inset -5px 5px 10px rgb(255,255,255,0.1);
         background: linear-gradient(to botton, #000 0%, #eee 4%);
     }
@@ -98,7 +98,7 @@ header.column span{
     background: linear-gradient(#fff 96%, #eee 4%);
 
 }
-.piano-keys .white:active{
+.piano-keys .white.active{
     box-shadow: inset -5px 5px 20px rgb(0,0,0,0,2);
     background: linear-gradient(to botton, #fff 0%, #434343);
 
