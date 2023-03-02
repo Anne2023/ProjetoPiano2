@@ -1,6 +1,7 @@
 const pianoKeys = document.querySelectorAll("piano-keys.key"); //por padrão, scr de áudio é "a" melodia
 
-let audio = new Audio("tunes/a.wav");
+let allKeys = [],
+audio = new Audio("tunes/a.wav");
 
 const playTune = (key) => {
     audio.scr = `tunes/${key}.wav`; //passando src de áudio com base na tecla pressionada
