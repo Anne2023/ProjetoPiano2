@@ -7,7 +7,10 @@ const playTune = (key) => {
     audio.play(); //tocando áudio
 
     const clickedKey = document.querySelector(`[data-key=${key}`)
-    clickedKey.classList.add("active");
+    clickedKey.classList.add("active"); //adicionando classe ativa ao elemento (chave) clicado
+    setTimeout(() => { //removendo a classe ativa após 150 ms do elemento clicado
+        clickedKey.classList.remove("active");
+    }, 150)
 }
 pianoKeys.forEach(key =>{
     //chamando a função playtune com a passagem do data-key de dados como um argumento
