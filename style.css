@@ -1,4 +1,4 @@
-/* import google font - poppins */
+/*importar a font do google fonts poppins*/
 @import url('https:fonts.googleapis.cpm/css2?family=Poppins:wght400;500;600&display=swap');
 *{
     margin: 0;
@@ -113,5 +113,46 @@ header.column span {
 }
 .piano-keys .key.hide span {
     display: none;
-    
+}
+
+@media screen and (max-width: 815px){
+    .wrapper{
+        padding: 25px;
+    }
+}
+header {
+    flex-direction: column;
+}
+header :where(h2, .column){
+    margin-bottom: 13px;
+}
+.volume-slider input {
+    max-width: 100px;
+}
+.piano-keys{
+    margin-top: 20px;
+}
+.piano-keys .key:where(:nth-child(9), :nth-child(10)) {
+    display: none;
+}
+.piano-keys .black {
+    height: 180px;
+    width: 60px;
+    margin: 0 -20px 0 -20px;
+}
+.piano-keys .white {
+    height: 180px;
+    width: 60px;
+}
+
+@media screen and (max-width: 615px){
+    .piano-keys .key:nth-child(13),
+    .piano-keys .key:nth-child(14),
+    .piano-keys .key:nth-child(15),
+    .piano-keys .key:nth-child(16),
+    .piano-keys .key:nth-child(16),
+        display: none;
+}
+.piano-keys .white{
+    width: 50px;
 }
