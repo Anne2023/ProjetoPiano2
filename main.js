@@ -1,41 +1,109 @@
-const pianoKeys = document.querySelectorAll(".piano-keys.key"), //por padrão, scr de áudio é "a" melodia
-volumeSlider = document.querySelectorAll(".volume-slider.input"),
-keyCheckbox = document.querySelectorAll(".keys-checkbox.input");
+const keys = document.querySelectorAll('.key');
+const checkbox = document.querySelector('.checkbox__keys');
+const switcher = document.querySelector('.switcher');
+const keysSection = document.querySelector('.piano__keys');
 
-let allKeys = [],
-audio = new Audio("tunes/a.wav");
-
-const playTune = (key) => {
-    audio.scr = `tunes/${key}.wav`; //passando src de áudio com base na tecla pressionada
-    audio.play(); //tocando áudio
-   
-    const clickedKey = document.querySelector(`[data-key="${key}"]`)
-    clickedKey.classList.add("active"); //adicionando classe ativa ao elemento (chave) clicado
-    setTimeout(() => { //removendo a classe ativa após 150 ms do elemento clicado
-        clickedKey.classList.remove("active");
-    }, 150)
+const playNote = (note) => {
+    const audio = new Audio(`../notes/${note}.wav`);
+    audio.play();
 }
 
-pianoKeys.forEach(key =>{ //adicionando valor da chave de dados ao array
-    allKeys.push(key.dataset.key);
-    //chamando a função playtune com a passagem do data-key de dados como um argumento
-    key.addEventListener("click", () => playTune(key.dataset.key));
+const handleMouseDown = (key) => {
+    playNote(key.getAttribute('data-note'));
+
+    if (key.className.includes('black')) {
+        key.classList.add('black--pressed');
+        return;
+    }
+
+    key.style.background = '#ddd';
+}
+
+const handleMouseUp = (key) => {
+
+    if (key.className.includes('black')) {
+        key.classList.remove('black--pressed');
+        return;
+    }
+
+    key.style.background = 'white';
+}
+
+keys.forEach((key) => {
+    key.addEventListener('mousedown', () => handleMouseDown(key))
+    key.addEventListener('mouseup', () => handleMouseUp(key))
 });
 
-const handVolume = (e) => {
-    audio.volume = e.target.value; //passando o rang (valor) como um volume de áudio
+checkbox.addEventListener('change', ({ target }) => {
+    if (target.checked) {
+        switcher.classList.add('switcher--active');
+        keysSection.classList.remove('disabled-keys');
+        return;
+    }
+
+    switcher.classList.remove('switcher--active');
+    keysSection.classList.add('disabled-keys');
+});
+
+const keyDownMapper = {
+    "Tab": () => handleMouseDown(keys[0]),
+    "1": () => handleMouseDown(keys[1]),
+    "q": () => handleMouseDown(keys[2]),
+    "2": () => handleMouseDown(keys[3]),
+    "w": () => handleMouseDown(keys[4]),
+    "e": () => handleMouseDown(keys[5]),
+    "4": () => handleMouseDown(keys[6]),
+    "r": () => handleMouseDown(keys[7]),
+    "5": () => handleMouseDown(keys[8]),
+    "t": () => handleMouseDown(keys[9]),
+    "6": () => handleMouseDown(keys[10]),
+    "y": () => handleMouseDown(keys[11]),
+    "u": () => handleMouseDown(keys[12]),
+    "8": () => handleMouseDown(keys[13]),
+    "i": () => handleMouseDown(keys[14]),
+    "9": () => handleMouseDown(keys[15]),
+    "o": () => handleMouseDown(keys[16]),
+    "p": () => handleMouseDown(keys[17]),
+    "-": () => handleMouseDown(keys[18]),
+    "[": () => handleMouseDown(keys[19]),
+    "=": () => handleMouseDown(keys[20]),
+    "]": () => handleMouseDown(keys[21]),
+    "Backspace": () => handleMouseDown(keys[22]),
+    "\\": () => handleMouseDown(keys[23]),
 }
 
-const shadowHideKeys = () => {
-    //alternando para ocultar a classe de cada tecla na caixa de seleção, clique
-    pianoKeys.forEach(key => key.classList.toggle("hide"))
+const keyUpMapper = {
+    "Tab": () => handleMouseUp(keys[0]),
+    "1": () => handleMouseUp(keys[1]),
+    "q": () => handleMouseUp(keys[2]),
+    "2": () => handleMouseUp(keys[3]),
+    "w": () => handleMouseUp(keys[4]),
+    "e": () => handleMouseUp(keys[5]),
+    "4": () => handleMouseUp(keys[6]),
+    "r": () => handleMouseUp(keys[7]),
+    "5": () => handleMouseUp(keys[8]),
+    "t": () => handleMouseUp(keys[9]),
+    "6": () => handleMouseUp(keys[10]),
+    "y": () => handleMouseUp(keys[11]),
+    "u": () => handleMouseUp(keys[12]),
+    "8": () => handleMouseUp(keys[13]),
+    "i": () => handleMouseUp(keys[14]),
+    "9": () => handleMouseUp(keys[15]),
+    "o": () => handleMouseUp(keys[16]),
+    "p": () => handleMouseUp(keys[17]),
+    "-": () => handleMouseUp(keys[18]),
+    "[": () => handleMouseUp(keys[19]),
+    "=": () => handleMouseUp(keys[20]),
+    "]": () => handleMouseUp(keys[21]),
+    "Backspace": () => handleMouseUp(keys[22]),
+    "\\": () => handleMouseUp(keys[23]),
 }
 
-const pressedKey = (e) => {
-    //(se) a tecla pressionada estiver no allkeys, apenas chama a função playtune
-    if(allKeys.includes(e-key))playTune(e.key);
-}
+document.addEventListener('keydown', (event) => {
+    event.preventDefault();
+    keyDownMapper[event.key]()
+});
 
-keyCheckbox.addEventListener("click", shadowHideKeys)
-volumeSlider.addEventListener("input", handVolume)
-document.addEventListener("keydown", pressedKey)
+document.addEventListener('keyup', (event) => {
+    keyUpMapper[event.key]()
+});

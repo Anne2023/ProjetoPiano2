@@ -1,158 +1,134 @@
-/*importar a font do google fonts poppins*/
-@import url('https:fonts.googleapis.cpm/css2?family=Poppins:wght400;500;600&display=swap');
-*{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
+
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 0 10px;
-    background: #e3f2fd;
+    background-color: #ebebeb;
 }
-.wrapper {
+
+.piano {
+    background-color: #121212;
+    width: 1000px;
+    height: 400px;
+    margin: 100px auto 0;
     border-radius: 20px;
-    padding: 35px 40px;
-    background: #141414;
-}
-.wrapper header {
-    color: #b2b2b2;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
-header h2 {
-    font-size: 1.6rem;
-}
-header.column {
-    display: flex;
-    align-items: center;
-}
-header.column span {
-    font-weight: 500;
-    margin-right: 15px;
-    font-size: 1.19rem;
-}
-.volume-slider input {
-    outline: none;
-    accent-color: #fff;
-}
-.keys-checkbox input {
-    width: 60px;
-    height: 30px;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    appearance: none;
-    border-radius: 30px;
-    background: #4b4b4b;
-}
-.keys-checkbox input::before { 
-    content: "";
-    height: 20px;
-    width: 20px;
-    top: 50%;
-    left: 5px;
-    border-radius: inherit;
-    position: absolute;
-    background: #8c8c8c;
-    transform: translateY(-50%);
-    transition: all 0.3s ease;
-}
-.keys-checkbox input:checked:before{
-    left: 35px;
-    background: #8c8c8c;
-}
-.piano-keys {
-    display: flex;
-    margin-top: 40px;
-}
-.piano-keys .key {
-    cursor: pointer;
-    user-select: none;
-    list-style: none;
-    color: #a2a2a2;
-    position: relative;
-    text-transform: uppercase;
-}
-.piano-keys .black{
-    width: 44px;
-    height: 140px;
-    z-index: 2;
-    margin: 0 -22px 0 -22px;
-    border-radius: 0 0 5px 5px;
-    background: linear-gradient(#333 96%, #000);
-    }
-    .piano-keys .black.active{
-        box-shadow: inset -5px 5px 10px rgb(255,255,255,0.1);
-        background: linear-gradient(to botton, #000 0%, #eee 4%);
-    }
-.piano-keys .white{
-    width: 70px;
-    height: 230px;
-    border-radius: 8px;
-    border: 1px solid #000;
-    background: linear-gradient(#fff 96%, #eee 4%);
 
-}
-.piano-keys .white.active{
-    box-shadow: inset -5px 5px 20px rgb(0,0,0,0,2);
-    background: linear-gradient(to botton, #fff 0%, #434343);
-
-}
-.piano-keys span{
-    position: absolute;
-    bottom: 20px;
+.controls {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    display: flex;
     width: 100%;
-    font-size: 1.13rem;
-    text-align: center;
-}
-.piano-keys .key.hide span {
-    display: none;
+    justify-content: space-between;
 }
 
-@media screen and (max-width: 815px){
-    .wrapper{
-        padding: 25px;
-    }
-}
-header {
-    flex-direction: column;
-}
-header :where(h2, .column){
-    margin-bottom: 13px;
-}
-.volume-slider input {
-    max-width: 100px;
-}
-.piano-keys{
-    margin-top: 20px;
-}
-.piano-keys .key:where(:nth-child(9), :nth-child(10)) {
-    display: none;
-}
-.piano-keys .black {
-    height: 180px;
-    width: 60px;
-    margin: 0 -20px 0 -20px;
-}
-.piano-keys .white {
-    height: 180px;
-    width: 60px;
+.controls h1 {
+    font-weight: 500;
+    font-size: 1.4rem;
 }
 
-@media screen and (max-width: 615px){
-    .piano-keys .key:nth-child(13),
-    .piano-keys .key:nth-child(14),
-    .piano-keys .key:nth-child(15),
-    .piano-keys .key:nth-child(16),
-    .piano-keys .key:nth-child(16),
-        display: none;
-}
-.piano-keys .white{
+.switcher {
     width: 50px;
+    height: 25px;
+    background-color: #555;
+    display: flex;
+    border-radius: 50px;
+    padding: 4px;
+}
+
+.switcher__button {
+    height: 100%;
+    aspect-ratio: 1/1;
+    background-color: #ddd;
+    border-radius: 25px;
+}
+
+.switcher--active {
+    background-color: #006eff;
+    justify-content: flex-end;
+}
+
+.checkbox__label {
+    display: flex;
+    gap: 15px;
+}
+
+.piano__keys {
+    width: 100%;
+    height: 300px;
+    background-color: #181818;
+    border-radius: 15px;
+    padding: 30px 40px;
+    display: flex;
+}
+
+.white {
+    background-color: white;
+    flex-grow: 1;
+    border-radius: 5px;
+    border-bottom: 8px solid #ddd;
+    color: rgba(0, 0, 0, 0.3);
+    margin-left: -17px;
+    z-index: 1;
+}
+
+.key span {
+    font-weight: 600;
+    position: absolute;
+    transition-duration: 300ms;
+}
+
+.key {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 8px;
+    user-select: none;
+}
+
+.black {
+    width: 40px;
+    background: linear-gradient(black, #333);
+    height: 150px;
+    border-radius: 0 0 5px 5px;
+    border-bottom: 8px solid #222;
+    margin-left: -20px;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.piano__keys .white:nth-child(1) {
+    margin-left: 0;
+}
+
+.piano__keys .white:nth-child(5) {
+    margin-right: 20px;
+}
+
+.piano__keys .white:nth-child(12) {
+    margin-right: 20px;
+}
+
+.piano__keys .white:nth-child(17) {
+    margin-right: 20px;
+}
+
+.black--pressed {
+    background: linear-gradient(#222, black);
+    border-bottom: none;
+    height: 148px;
+}
+
+.disabled-keys span {
+    opacity: 0;
 }
